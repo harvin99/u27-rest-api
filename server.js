@@ -2,10 +2,13 @@ require('dotenv').config()
 const express = require("express")
 const mongoose = require('mongoose')
 const cookieParser = require('cookie-parser')
-const bodyParser = require('body-parser')
+//const bodyParser = require('body-parser')
 
 const apiLoginRouter = require('./api/routes/api.login.router')
 const apiTransactionsRouter = require('./api/routes/api.transactions.router')
+const apiUsersRouter = require('./api/routes/api.users.router')
+const apiBooksRouter = require('./api/routes/api.books.router')
+const apiCartsRouter = require('./api/routes/api.carts.router')
 
 const booksRouter = require('./routes/books.router')
 const usersRouter = require('./routes/users.router')
@@ -27,8 +30,8 @@ mongoose.connection.on('connected', () => {
 })
 const app = express()
 //For body parser 
-app.use(bodyParser.urlencoded({extended: false}))
-app.use(bodyParser.json())
+app.use(express.urlencoded({extended: false}))
+app.use(express.json())
 //For favicon
 app.use(express.static('public'))
 app.use(cookieParser(process.env.SESSION_KEY))
@@ -41,6 +44,10 @@ app.set('views', './views')
 //For API
 app.use('/api/login', apiLoginRouter)
 app.use('/api/transactions', apiTransactionsRouter)
+app.use('/api/users', apiUsersRouter)
+app.use('/api/books', apiBooksRouter)
+app.use('/api/carts', apiCartsRouter)
+
 //Router
 app.get('/', (req,res) => {
   res.render('index')

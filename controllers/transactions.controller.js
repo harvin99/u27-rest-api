@@ -73,9 +73,7 @@ module.exports.getTransaction = async (req, res) => {
 
 module.exports.getCreateTransaction = async (req, res) => {
   try {
-    var user = await User.findById({_id: req.signedCookies.userId})
-    // console.log(typeof(req.signedCookies.userId))
-    // console.log(typeof(user._id))
+    var user = await User.findById(req.signedCookies.userId)
     if(user.isAdmin){
       res.render('transactions_create',{
         users : await User.find(),

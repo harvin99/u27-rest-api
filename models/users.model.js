@@ -8,7 +8,6 @@ const userSchema = new mongoose.Schema({
     isAdmin: Boolean,
     wrongLoginCount: Number,
     avatarUrl: String,
-    cart : []
 })
 const User = mongoose.model('User', userSchema, 'users')
 
